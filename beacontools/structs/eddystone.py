@@ -16,8 +16,7 @@ from .estimote import EstimoteTelemetryFrame
 EddystoneUIDFrame = Struct(
     "tx_power" / Int8sl,
     "namespace" / Array(10, Byte),
-    "instance" / Array(6, Byte),
-    "rfu" / Array(2, Byte)
+    "instance" / Array(6, Byte)
 )
 
 EddystoneURLFrame = Struct(
@@ -28,7 +27,7 @@ EddystoneURLFrame = Struct(
 
 UnencryptedTLMFrame = Struct(
     "voltage" / Int16ub,
-    "temperature" / Int16ul,
+    "temperature" / Int16ub,
     "advertising_count" / Int32ub,
     "seconds_since_boot" / Int32ub,
 )

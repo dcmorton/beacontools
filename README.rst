@@ -2,13 +2,11 @@ BeaconTools - Universal beacon scanning
 =======================================
 |PyPI Package| |Build Status| |Coverage Status| |Requirements Status|
 
-A Python library for working with various types of Bluetooth LE Beacons.
+A Python library for working with MinewTech E9 Bluetooth LE Beacons.
 
 Currently supported types are:
 
-* `Eddystone Beacons <https://github.com/google/eddystone/>`__
-* `iBeacons <https://developer.apple.com/ibeacon/>`__ (Apple and Cypress CYALKIT-E02)
-* `Estimote Beacons (Telemetry only) <https://github.com/estimote/estimote-specs>`__
+* MinewTech E9 Beacons `Eddystone Beacons <https://github.com/google/eddystone/>`__
 
 The BeaconTools library has two main components:
 
@@ -22,7 +20,7 @@ If you only want to use the **parser** install the library using pip and you're 
 .. code:: bash
 
     pip install beacontools
-    
+
 If you want to perfom beacon **scanning** there are a few more requirement. First of all you need an OS with bluez (most Linux OS; Windows and macOS are also possible but untested, see the "`Build Requirements <https://github.com/karulis/pybluez>`__" section of pybluez for more information).
 
 .. code:: bash
@@ -33,7 +31,7 @@ If you want to perfom beacon **scanning** there are a few more requirement. Firs
     sudo setcap 'cap_net_raw,cap_net_admin+eip' $(readlink -f $(which python))
     # install beacontools with scanning support
     pip install beacontools[scan]
-    
+
 Usage
 -----
 See the `examples <https://github.com/citruz/beacontools/tree/master/examples>`__ directory for more usage examples.
@@ -44,7 +42,7 @@ Parser
 .. code:: python
 
     from beacontools import parse_packet
-    
+
     tlm_packet = b"\x02\x01\x06\x03\x03\xaa\xfe\x11\x16\xaa\xfe\x20\x00\x0b\x18\x13\x00\x00\x00" \
                  b"\x14\x67\x00\x00\x2a\xc4\xe4"
     tlm_frame = parse_packet(tlm_packet)
@@ -64,7 +62,7 @@ Scanner
         print("<%s, %d> %s %s" % (bt_addr, rssi, packet, additional_info))
 
     # scan for all TLM frames of beacons in the namespace "12345678901234678901"
-    scanner = BeaconScanner(callback, 
+    scanner = BeaconScanner(callback,
         device_filter=EddystoneFilter(namespace="12345678901234678901"),
         packet_filter=EddystoneTLMFrame
     )
@@ -82,8 +80,8 @@ Scanner
     def callback(bt_addr, rssi, packet, additional_info):
         print("<%s, %d> %s %s" % (bt_addr, rssi, packet, additional_info))
 
-    # scan for all iBeacon advertisements from beacons with the specified uuid 
-    scanner = BeaconScanner(callback, 
+    # scan for all iBeacon advertisements from beacons with the specified uuid
+    scanner = BeaconScanner(callback,
         device_filter=IBeaconFilter(uuid="e5b9e3a6-27e2-4c36-a257-7698da5fc140")
     )
     scanner.start()
@@ -119,10 +117,10 @@ Beacontools follows the `semantic versioning <https://semver.org/>`__ scheme.
     * Updated dependencies
 * 1.0.1
     * Implemented a small tweak which reduces the CPU usage.
-* 1.0.0 
+* 1.0.0
     * Implemented iBeacon support
     * Added rssi to callback function.
-* 0.1.2 
+* 0.1.2
     * Initial release
 
 .. |PyPI Package| image:: https://badge.fury.io/py/beacontools.svg
