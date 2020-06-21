@@ -1,6 +1,6 @@
 """All low level structures used for parsing eddystone packets."""
 from construct import Struct, Byte, Switch, OneOf, Int8sl, Array, \
-                      Int16ul, Int16ub, Int32ub, GreedyString, GreedyRange, \
+                      Int16ul, Int16ub, Int16sb, Int32ub, GreedyString, GreedyRange, \
                       Bytes, BitStruct, BitsInteger, Flag
 
 from ..const import EDDYSTONE_UUID, EDDYSTONE_URL_SCHEMES, EDDYSTONE_TLM_UNENCRYPTED, \
@@ -27,7 +27,7 @@ EddystoneURLFrame = Struct(
 
 UnencryptedTLMFrame = Struct(
     "voltage" / Int16ub,
-    "temperature" / Int16ub,
+    "temperature" / Int16sb,
     "advertising_count" / Int32ub,
     "seconds_since_boot" / Int32ub,
 )
